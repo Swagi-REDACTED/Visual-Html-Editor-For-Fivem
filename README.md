@@ -14,4 +14,4 @@ Later Additions:
 1. Standard macho menu visual editing in pure lua via an interpreter
 
 Update Log:
-1. Initial release -- Currently a working visual editor for htmls is implemented but its not nearly perfected I'm posting this earlier than I normally would post something because I think its a very promising design
+1. Initial release MMM.py (Macho Menu Maker) -- Currently a working visual editor for htmls is implemented but its not nearly perfected I'm posting this earlier than I normally would post something because I think its a very promising design
