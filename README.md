@@ -8,6 +8,7 @@ Update Plans:
 3. Automatic nui message creation and lua handling.
 4. Handling to import any custom html to edit and save or even just import an html to directly save into a lua struct.
 5. Eventually Improve lua struct to a default menu generation which would allow custom open key and work immediately upon saving.
+6. Element snapping flexbox support and nested table creation aswell as support.
 
 Later Additions:
 -- things i might(probably will) do but arent really needed.
