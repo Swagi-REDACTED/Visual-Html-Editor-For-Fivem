@@ -15,3 +15,5 @@ Later Additions:
 
 Update Log:
 1. Initial release MMM.py (Macho Menu Maker) -- Currently a working visual editor for htmls is implemented but its not nearly perfected I'm posting this earlier than I normally would post something because I think its a very promising design
+
+2. Html Import partially working finalization coming soon.
