@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Web Editor</title>
+    <!-- Tailwind CSS for rapid UI development -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <!-- Custom application styles -->
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="text-sm">
+    <!-- Main application layout grid -->
+    <div id="main-layout">
+        <!-- Top Toolbar -->
+        <div id="top-toolbar" class="p-2 flex items-center space-x-4">
+            <h1 class="text-lg font-bold text-white">Visual Editor</h1>
+            <div class="flex items-center space-x-2">
+                <button id="toggle-elements" class="bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded" title="Toggle Elements Panel"><i class="fas fa-bars"></i></button>
+                <button id="toggle-hierarchy" class="bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded" title="Toggle Hierarchy Panel"><i class="fas fa-sitemap"></i></button>
+                <button id="toggle-properties" class="bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded" title="Toggle Properties Panel"><i class="fas fa-sliders-h"></i></button>
+            </div>
+             <div class="flex items-center space-x-2 ml-auto">
+                <label for="master-key" class="text-white">Master Key:</label>
+                <input type="text" id="master-key" class="bg-gray-900 text-white w-24 p-1 rounded" placeholder="e.g., 0x78">
+            </div>
+        </div>
+
+        <!-- Elements Panel (Left) -->
+        <div id="elements-panel" class="panel p-4 flex flex-col text-white">
+            <h2 class="text-xl font-bold mb-4">Elements</h2>
+            <div id="toolbar" class="space-y-2">
+                <h3 class="font-bold mt-4 border-b border-gray-600 pb-1">Containers</h3>
+                <div class="p-2 bg-gray-700 rounded cursor-pointer" draggable="true" data-type="div"><i class="fas fa-square-full mr-2"></i> Div</div>
+                <div class="p-2 bg-gray-700 rounded cursor-pointer" draggable="true" data-type="header"><i class="fas fa-window-maximize mr-2"></i> Header</div>
+                <div class="p-2 bg-gray-700 rounded cursor-pointer" draggable="true" data-type="content"><i class="fas fa-align-justify mr-2"></i> Content</div>
+                <div class="p-2 bg-gray-700 rounded cursor-pointer" draggable="true" data-type="footer"><i class="fas fa-shoe-prints mr-2"></i> Footer</div>
+                <h3 class="font-bold mt-4 border-b border-gray-600 pb-1">Widgets</h3>
+                <div class="p-2 bg-gray-700 rounded cursor-pointer" draggable="true" data-type="text"><i class="fas fa-font mr-2"></i> Text</div>
+                <div class="p-2 bg-gray-700 rounded cursor-pointer" draggable="true" data-type="button"><i class="fas fa-mouse-pointer mr-2"></i> Button</div>
+                <div class="p-2 bg-gray-700 rounded cursor-pointer" draggable="true" data-type="img"><i class="fas fa-image mr-2"></i> Image</div>
+                <div class="p-2 bg-gray-700 rounded cursor-pointer" draggable="true" data-type="checkbox"><i class="fas fa-check-square mr-2"></i> Checkbox</div>
+                <div class="p-2 bg-gray-700 rounded cursor-pointer" draggable="true" data-type="slider"><i class="fas fa-sliders-h mr-2"></i> Slider</div>
+                <div class="p-2 bg-gray-700 rounded cursor-pointer" draggable="true" data-type="svg"><i class="fas fa-vector-square mr-2"></i> SVG</div>
+            </div>
+            <div class="mt-auto pt-4 space-y-2">
+                <button id="import-btn" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"><i class="fas fa-file-import mr-2"></i> Import HTML</button>
+                <button id="export-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><i class="fas fa-file-export mr-2"></i> Export to HTML</button>
+                <button id="save-lua-btn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"><i class="fas fa-save mr-2"></i> Save to Lua</button>
+                <button id="save-project-btn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded"><i class="fas fa-save mr-2"></i> Save Project</button>
+                <button id="load-btn" class="w-full bg-yellow-600 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded"><i class="fas fa-folder-open mr-2"></i> Load Project</button>
+            </div>
+        </div>
+
+        <!-- Vertical Resizer 1 -->
+        <div id="resizer-v1" class="resizer-v"></div>
+        
+        <!-- Hierarchy Panel -->
+        <div id="hierarchy-panel-container" class="panel p-4 flex flex-col text-white">
+            <h2 class="text-xl font-bold mb-4">Hierarchy</h2>
+            <div id="hierarchy-panel" class="flex-1"></div>
+        </div>
+
+        <!-- Vertical Resizer 2 -->
+        <div id="resizer-v2" class="resizer-v"></div>
+
+        <!-- Canvas and Code Editors Section -->
+        <div id="canvas-section" class="panel">
+            <div id="canvas-wrapper" class="p-4">
+                <div id="canvas" class="h-full w-full"></div>
+            </div>
+            <div id="resizer-h1" class="resizer-h"></div>
+            <div id="bottom-editors" class="p-2 grid grid-cols-2 gap-2">
+                <div class="editor-container">
+                    <label for="global-css">Global CSS</label>
+                    <textarea id="global-css" placeholder="Global CSS rules..."></textarea>
+                    <label for="global-js">Global JS</label>
+                    <textarea id="global-js" placeholder="Global JavaScript..."></textarea>
+                </div>
+                <div class="editor-container">
+                    <label for="element-css">Element CSS (Overrides)</label>
+                    <textarea id="element-css" placeholder="CSS for selected element..."></textarea>
+                    <label for="element-js">Element JS</label>
+                    <textarea id="element-js" placeholder="JS for selected element... (use 'el')"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vertical Resizer 3 -->
+        <div id="resizer-v3" class="resizer-v"></div>
+
+        <!-- Properties Panel (Right) -->
+        <div id="properties-panel-container" class="panel p-4 flex flex-col">
+            <h2 class="text-xl font-bold mb-4 text-white">Properties</h2>
+            <div id="properties-panel" class="space-y-1">
+                <p class="text-gray-400">Select an element to edit.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Context Menu (Right-click menu) -->
+    <div id="context-menu"></div>
+
+    <!-- Core Application Logic -->
+    <script src="/app.js"></script>
+</body>
+</html>
