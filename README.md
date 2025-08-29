@@ -2,7 +2,7 @@
 I'm making a multipurpose Visual html editor designed to make macho menus with either dui or nui its in its early stages right now but I'm planning to make it multipurpose and high quality but for now it should work to visually design complex html's
 
 Update Plans:
--- expect most these to get done some time in the next 2 months or so(don't hound me I like free-time every now and again, updates will happen when they happen).
+-- expect most these to get done some time in the next 8 months or so(don't hound me I like free-time every now and again, updates will happen when they happen).
 1. Full handling to for nested menus and creation of complex Phaze like html designs.
 2. Automated Js creation for Instant working lua menu struct that can easily be altered.
 3. Automatic nui message creation and lua handling.
